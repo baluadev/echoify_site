@@ -30,17 +30,17 @@ export default function HowItWorks() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="text-center mb-16"
+        className="text-center mb-12 md:mb-16"
       >
-        <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-3 md:mb-4">
           How It Works
         </h2>
-        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+        <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto px-4 sm:px-0">
           Get started in three simple steps
         </p>
       </motion.div>
       
-      <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
+      <div className="grid md:grid-cols-3 gap-8 md:gap-8 lg:gap-12">
         {steps.map((step, index) => {
           const Icon = step.icon
           return (
@@ -58,21 +58,21 @@ export default function HowItWorks() {
               </div>
               
               {/* Card */}
-              <div className="bg-gray-50 rounded-2xl p-8 pt-12 shadow-lg hover:shadow-xl transition-shadow duration-300 text-center border border-gray-100">
-                <div className="w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
-                  <Icon className="w-8 h-8 text-white" />
+              <div className="bg-gray-50 rounded-2xl p-6 md:p-8 pt-12 md:pt-12 shadow-lg hover:shadow-xl transition-shadow duration-300 text-center border border-gray-100">
+                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-2xl flex items-center justify-center mx-auto mb-4 md:mb-6 shadow-lg">
+                  <Icon className="w-7 h-7 sm:w-8 sm:h-8 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 md:mb-4">
                   {step.title}
                 </h3>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
                   {step.description}
                 </p>
               </div>
               
               {/* Connector Line */}
               {index < steps.length - 1 && (
-                <div className="hidden md:block absolute top-1/2 -right-6 lg:-right-12 w-12 lg:w-24 h-0.5 bg-gradient-to-r from-red-300 to-red-100"></div>
+                <div className="hidden md:block absolute top-1/2 -right-4 lg:-right-6 xl:-right-12 w-8 lg:w-12 xl:w-24 h-0.5 bg-gradient-to-r from-red-300 to-red-100"></div>
               )}
             </motion.div>
           )

@@ -18,12 +18,12 @@ export default function CTA() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center space-y-8"
+          className="text-center space-y-6 md:space-y-8"
         >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-3 md:mb-4">
             Ready to Start Listening?
           </h2>
-          <p className="text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto px-4 sm:px-0">
             Download Echoify today and join millions of music lovers around the world.
           </p>
           
@@ -32,10 +32,10 @@ export default function CTA() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center pt-4"
+            className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center pt-4 px-4 sm:px-0"
           >
-            <AppButton store="apple" />
-            <AppButton store="google" />
+            <AppButton store="apple" className="w-full sm:w-auto" />
+            <AppButton store="google" className="w-full sm:w-auto" />
           </motion.div>
         </motion.div>
       </div>

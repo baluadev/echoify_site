@@ -15,24 +15,17 @@ export default function Hero() {
       // Force play video
       const playPromise = video.play()
       if (playPromise !== undefined) {
-        playPromise
-          .then(() => {
-            console.log('Video is playing')
-          })
-          .catch((error) => {
-            console.log('Video autoplay failed:', error)
-          })
+        playPromise.catch(() => {
+          // Silently handle autoplay failure
+        })
       }
       
-      // Log video events
-      video.addEventListener('loadeddata', () => {
-        console.log('Video loaded')
-      })
-      video.addEventListener('canplay', () => {
-        console.log('Video can play')
-      })
-      video.addEventListener('error', (e) => {
-        console.log('Video error event:', e)
+      // Handle video errors
+      video.addEventListener('error', () => {
+        const target = video
+        if (target) {
+          target.style.display = 'none'
+        }
       })
     }
   }, [])
@@ -55,14 +48,10 @@ export default function Hero() {
           className="absolute inset-0 w-full h-full object-cover z-10"
           style={{ minWidth: '100%', minHeight: '100%' }}
           onError={(e) => {
-            console.log('Video error:', e)
             const target = e.target as HTMLVideoElement
             if (target) {
               target.style.display = 'none'
             }
-          }}
-          onLoadedData={() => {
-            console.log('Video data loaded')
           }}
         >
           {/* Option 1: Local video file (recommended) - Place video in /public folder */}
@@ -77,28 +66,28 @@ export default function Hero() {
       </div>
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
           {/* Content */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-center lg:text-left space-y-8"
+            className="text-center lg:text-left space-y-6 md:space-y-8"
           >
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="flex items-center gap-4 justify-center lg:justify-start"
+              className="flex items-center gap-3 md:gap-4 justify-center lg:justify-start"
             >
               <Image
                 src="/logo.svg"
                 alt="Echoify Logo"
                 width={80}
                 height={80}
-                className="w-16 h-16 md:w-20 md:h-20"
+                className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20"
               />
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight">
                 Echoify
               </h1>
             </motion.div>
@@ -107,7 +96,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-2xl md:text-3xl font-semibold text-gray-900"
+              className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-900"
             >
               Listen. Share. Connect.
             </motion.p>
@@ -116,7 +105,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-lg md:text-xl text-gray-600 max-w-xl mx-auto lg:mx-0"
+              className="text-base sm:text-lg md:text-xl text-gray-600 max-w-xl mx-auto lg:mx-0 px-4 sm:px-0"
             >
               Music & video sharing experience. Discover new sounds, share your favorites, and connect with friends through the power of music.
             </motion.p>
@@ -125,10 +114,10 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+              className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start px-4 sm:px-0"
             >
-              <AppButton store="apple" />
-              <AppButton store="google" />
+              <AppButton store="apple" className="w-full sm:w-auto" />
+              <AppButton store="google" className="w-full sm:w-auto" />
             </motion.div>
           </motion.div>
           
@@ -137,24 +126,20 @@ export default function Hero() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative flex justify-center lg:justify-end"
+            className="relative flex justify-center lg:justify-end mt-8 lg:mt-0"
           >
-            <div className="relative w-full max-w-md">
+            <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-md">
               <div className="absolute inset-0 bg-gray-100 rounded-3xl blur-3xl opacity-50 -z-10"></div>
-              <div className="relative bg-white rounded-3xl shadow-2xl p-4 border border-gray-100">
-                <div className="aspect-[9/19] bg-gray-50 rounded-2xl flex items-center justify-center border border-gray-200">
-                  <div className="text-center space-y-4 p-8">
-                    <div className="w-24 h-24 mx-auto flex items-center justify-center">
-                      <Image
-                        src="/logo.svg"
-                        alt="Echoify App"
-                        width={96}
-                        height={96}
-                        className="w-24 h-24"
-                      />
-                    </div>
-                    <p className="text-gray-600 font-medium">App Mockup</p>
-                  </div>
+              <div className="relative bg-white rounded-3xl shadow-2xl p-3 sm:p-4 border border-gray-100">
+                <div className="aspect-[9/19] bg-gray-50 rounded-2xl overflow-hidden border border-gray-200 relative">
+                  <Image
+                    src="/screen-1.jpg"
+                    alt="Echoify App Screenshot"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 640px) 280px, (max-width: 768px) 320px, (max-width: 1024px) 360px, 400px"
+                    priority
+                  />
                 </div>
               </div>
             </div>
